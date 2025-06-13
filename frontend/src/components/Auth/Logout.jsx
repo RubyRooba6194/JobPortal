@@ -8,7 +8,7 @@ export default function Logout() {
   const { logout } = useAuth();
 
   const handleLogout = async () => {
-    await axios.get("/auth/logout");
+    await axios.get("/api/auth/logout");
     logout();
     navigate("/login");
   };

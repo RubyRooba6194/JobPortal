@@ -5,7 +5,7 @@ export default function ApplicationsList() {
   const [apps, setApps] = useState([]);
 
   useEffect(() => {
-    axios.get("/job/mine").then((res) => setApps(res.data));
+    axios.get("/api/job/mine").then((res) => setApps(res.data));
   }, []);
 
   return (

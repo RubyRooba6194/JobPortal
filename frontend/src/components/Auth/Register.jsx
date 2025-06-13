@@ -69,7 +69,7 @@ export default function Register() {
       await schema.validate(form, { abortEarly: false });
 
       // Make API call (removed /api prefix since it's in baseURL)
-      const response = await axios.post("/auth/register", form);
+      const response = await axios.post("/api/auth/register", form);
 
       console.log("Registration successful:", response.data);
 

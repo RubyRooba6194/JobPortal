@@ -131,7 +131,7 @@ exports.login = async (req, res) => {
         name: user.name,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "7d" }
     );
 
     // Set HTTP-only cookie
@@ -175,4 +175,13 @@ exports.logout = (req, res) => {
     console.error("Logout: Error:", error);
     res.status(500).json({ message: "Error during logout" });
   }
+};
+
+// Add this function
+exports.profile = (req, res) => {
+  // req.user should be set by your authMiddleware (JWT verified)
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  res.json({ user: req.user });
 };

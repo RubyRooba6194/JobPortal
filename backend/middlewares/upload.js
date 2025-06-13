@@ -1,9 +1,17 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
+
+const uploadDir = path.join(__dirname, "../uploads/resumes");
+
+// Create the directory if it doesn't exist
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "backend/uploads/resumes");
+    cb(null, uploadDir); // Use absolute path
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, "_"));

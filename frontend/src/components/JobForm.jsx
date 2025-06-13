@@ -62,7 +62,7 @@ export default function JobForm() {
       const formData = new FormData();
       Object.keys(form).forEach((key) => formData.append(key, form[key]));
       formData.append("resume", resume);
-      await axios.post("/job/apply", formData, {
+      await axios.post("/api/job/apply", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setSuccess("Application submitted!");
