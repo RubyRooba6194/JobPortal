@@ -3,22 +3,43 @@ import axios from "../api/axios";
 
 export default function useAuth() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Could add /api/auth/profile if you implement it
-    const savedUser = JSON.parse(localStorage.getItem("user"));
-    if (savedUser) setUser(savedUser);
+    checkAuthStatus();
   }, []);
 
-  const login = (user) => {
-    setUser(user);
-    localStorage.setItem("user", JSON.stringify(user));
+  const checkAuthStatus = async () => {
+    try {
+      const response = await axios.get("/auth/profile");
+      if (response.data && response.data.user) {
+        setUser(response.data.user);
+        console.log("User authenticated:", response.data.user);
+      } else {
+        console.log("No user in response");
+        setUser(null);
+      }
+    } catch (error) {
+      console.log("User not authenticated", error);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
+  const login = (userData) => {
+    setUser(userData);
   };
 
-  return { user, login, logout };
+  const logout = async () => {
+    try {
+      await axios.get("/auth/logout");
+      setUser(null);
+    } catch (error) {
+      console.error("Logout error:", error);
+      setUser(null);
+    }
+  };
+
+  return { user, login, logout, loading, checkAuthStatus };
 }

@@ -7,6 +7,7 @@ import ApplicationsList from "./components/ApplicationsList";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import useAuth from "./hooks/useAuth";
+import PrivateRoute from "./components/PrivateRoute";
 
 export default function App() {
   const { user } = useAuth();
@@ -45,10 +46,20 @@ export default function App() {
           path="/login"
           element={user ? <Navigate to="/dashboard" /> : <Login />}
         />
-        <Route
+        {/* <Route
           path="/dashboard"
           element={user ? <Dashboard /> : <Navigate to="/login" />}
+        /> */}
+
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
         />
+
         <Route
           path="/apply"
           element={user ? <JobForm /> : <Navigate to="/login" />}
