@@ -10,6 +10,8 @@ export default function Logout() {
   const handleLogout = async () => {
     await axios.get("/api/auth/logout");
     logout();
+    alert("Logout successfully"); // Show the message
+
     navigate("/login");
   };
 

@@ -94,9 +94,9 @@ export default function JobForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-2xl mx-auto p-8 bg-white rounded shadow"
+      className="max-w-2xl mx-auto p-8 bg-white rounded shadow mt-10"
     >
-      <h2 className="text-2xl font-bold mb-6">Job Application</h2>
+      <h2 className="text-2xl font-bold mb-6 pb-10 bg-blue-500 rounded-md text-white pl-5 pt-5 w-100">Job Application</h2>
       <div className="grid grid-cols-2 gap-4">
         <input
           name="name"
