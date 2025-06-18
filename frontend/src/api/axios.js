@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5000", // your backend server
+  baseURL: "https://jobportal-xxfb.onrender.com", // your backend server
   
   withCredentials: true, // <- VERY IMPORTANT
 });

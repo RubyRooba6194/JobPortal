@@ -8,15 +8,19 @@ export default function Logout() {
   const { logout } = useAuth();
 
   const handleLogout = async () => {
-    await axios.get("/api/auth/logout");
-    logout();
-    alert("Logout successfully"); // Show the message
-
-    navigate("/login");
+    try {
+      await axios.get("/api/auth/logout");
+      logout();
+      alert("Logout successfully");
+      navigate("/login");
+    } catch (err) {
+      alert("Logout failed. Please try again.");
+    }
   };
 
   return (
     <button
+      type="button"
       title="Logout"
       onClick={handleLogout}
       className="inline-flex items-center text-red-600 hover:text-red-800"
